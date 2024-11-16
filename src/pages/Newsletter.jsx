@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
 const Newsletter = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ const Newsletter = () => {
   useEffect(() => {
     const fetchCsrfToken = async () => {
       try {
-        const res = await fetch("http://localhost:3000/csrf-token", {
+        const res = await fetch(`${apiBaseUrl}/csrf-token`, {
           credentials: "include",
         })
         const data = await res.json()
@@ -36,7 +37,7 @@ const Newsletter = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log(formData)
-    const response = await fetch("http://localhost:3000/api/journal-signup", {
+    const response = await fetch(`${apiBaseUrl}/api/journal-signup`, {
       method: "POST",
       credentials: "include",
       headers: {
